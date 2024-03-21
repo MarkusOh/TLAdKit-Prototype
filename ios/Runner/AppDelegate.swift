@@ -23,8 +23,6 @@ class TLAdKitViewFactory: NSObject, FlutterPlatformViewFactory {
 
 class TLAdKitView: NSObject, FlutterPlatformView {
     func view() -> UIView {
-        let testView = UIView()
-        testView.backgroundColor = .systemRed
-        return testView
+        return SelfMediatingAdView()
     }
 }

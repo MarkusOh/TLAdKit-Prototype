@@ -6,9 +6,17 @@ class MainContents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: const [
-        Text("Good boy 1"),
-        Text("Good boy 2"),
+      children: [
+        const Text("Good boy 1"),
+        const Text("Good boy 2"),
+        SizedBox(child: UiKitView(viewType: "TLAdKit-Type"), height: 100,),
+        SizedBox(child: UiKitView(viewType: "TLAdKit-Type"), height: 100,),
+        SizedBox(child: UiKitView(viewType: "TLAdKit-Type"), height: 100,),
+        SizedBox(child: UiKitView(viewType: "TLAdKit-Type"), height: 100,),
+        SizedBox(child: UiKitView(viewType: "TLAdKit-Type"), height: 100,),
+        SizedBox(child: UiKitView(viewType: "TLAdKit-Type"), height: 100,),
+        SizedBox(child: UiKitView(viewType: "TLAdKit-Type"), height: 100,),
+        SizedBox(child: UiKitView(viewType: "TLAdKit-Type"), height: 100,),
       ],
     );
   }
