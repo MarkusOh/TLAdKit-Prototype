@@ -11,6 +11,17 @@ import AdFitSDK
 
 class SelfMediatingAdView: UIView, GADBannerViewDelegate, AdFitBannerAdViewDelegate {
     
+    private static var managedAdViews: [String: SelfMediatingAdView] = .init()
+    
+    public static func getAdView(for areaIndex: String) -> SelfMediatingAdView {
+        if let existingAdView = managedAdViews[areaIndex] {
+            return existingAdView
+        } else {
+            managedAdViews[areaIndex] = SelfMediatingAdView()
+            return managedAdViews[areaIndex]!
+        }
+    }
+    
     static var width: Double = {
         let screen = UIApplication.shared
             .connectedScenes
@@ -19,7 +30,7 @@ class SelfMediatingAdView: UIView, GADBannerViewDelegate, AdFitBannerAdViewDeleg
             .filter({ $0.isKeyWindow })
             .first
         
-        return Double(screen?.frame.size.width ?? .zero)
+        return Double(screen?.frame.size.width ?? 320)
     }()
     
     lazy var admobBannerAd: GADBannerView = {
@@ -49,7 +60,7 @@ class SelfMediatingAdView: UIView, GADBannerViewDelegate, AdFitBannerAdViewDeleg
     
     let refreshInterval = 30
     
-    init() {
+    private init() {
         super.init(
             frame: .init(
                 origin: .zero,
@@ -68,12 +79,17 @@ class SelfMediatingAdView: UIView, GADBannerViewDelegate, AdFitBannerAdViewDeleg
         fatalError("init(coder:) has not been implemented")
     }
     
-    func loadAd() {
-        
-    }
-    
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         self.addSubview(bannerView)
+        
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            bannerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            bannerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            bannerView.topAnchor.constraint(equalTo: self.topAnchor),
+            bannerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+        ])
     }
     
     func adViewDidReceiveAd(_ bannerAdView: AdFitBannerAdView) {

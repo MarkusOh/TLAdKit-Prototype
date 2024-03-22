@@ -11,11 +11,15 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(
+      home: DefaultTabController(length: 2, child: Scaffold(
+        bottomNavigationBar: SafeArea(child: TabBar(tabs: [
+          Tab(text: "Ad Examples",),
+          Tab(text: "Random Thing",),
+        ])),
         body: Center(
           child: MainContents(),
         ),
-      ),
+      )),
     );
   }
 }
